@@ -3,8 +3,30 @@ body {
     background: #111;
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
     height: 100vh;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+h1 {
+    padding-top: 2cm;
+    color: white;
+    font-size: 40px;
+    margin: 10px 0 4px;
+}
+
+.app {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 10px;
+}
+
+h2 {
+    margin: 0 0 16px;
+    padding-top: 0;
+    color: gray;
+    font-size: 25px;
 }
 
 canvas {
