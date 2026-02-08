@@ -34,13 +34,15 @@ function drawIntersection() {
     const posY1 = 440 +  - boxHeight1/2;
 
     contents.fillStyle="white";
-    contents.fillRect(posX1, posY1, boxWidth1, boxHeight1);
+    drawTrafficBox(483 - boxWidth1/2, 440 - boxHeight1/2, boxWidth1, boxHeight1, true);
+    // contents.fillRect(posX1, posY1, boxWidth1, boxHeight1);
 
     //left road
     const posX2 = 318 - boxWidth1/2;
     const posY2 = 360 +  - boxHeight1/2;
     contents.fillStyle="white";
-    contents.fillRect(posX2, posY2, boxWidth1, boxHeight1);
+    drawTrafficBox(318 - boxWidth1/2, 360 - boxHeight1/2, boxWidth1, boxHeight1, true);
+    // contents.fillRect(posX2, posY2, boxWidth1, boxHeight1);
 
     //top road
     const boxWidth2 = 70;
@@ -48,14 +50,37 @@ function drawIntersection() {
     const posX3 = 440 - boxWidth2/2;
     const posY3 = 315 +  - boxHeight2/2;
     contents.fillStyle= "white";
-    contents.fillRect(posX3, posY3, boxWidth2, boxHeight2);
+    drawTrafficBox(440 - boxWidth2/2, 315 - boxHeight2/2, boxWidth2, boxHeight2, false);
+    // contents.fillRect(posX3, posY3, boxWidth2, boxHeight2);
 
     //bottom road
     const posX4 = 360 - boxWidth2/2;
     const posY4 = 483 +  - boxHeight2/2;
     contents.fillStyle= "white";
-    contents.fillRect(posX4, posY4, boxWidth2, boxHeight2);
+    drawTrafficBox(360 - boxWidth2/2, 483 - boxHeight2/2, boxWidth2, boxHeight2, false);
+    // contents.fillRect(posX4, posY4, boxWidth2, boxHeight2);
 }
 
+function drawTrafficBox(x,y,width, height, isVertical = true){
+    const colors = ["red", "orange", "green"];
+
+    if(isVertical){
+        const eachLightHeight = height/3;
+
+        for(let i =0; i<3; i++ ){
+            contents.fillStyle = colors[i];
+
+            contents.fillRect(x, y+i*eachLightHeight, width, eachLightHeight);
+        }
+
+    }else {
+        const eachLightWidth = width/3;
+        for(let i=0; i<3; i++){
+            contents.fillStyle = colors[i];
+
+            contents.fillRect(x+i*eachLightWidth, y, eachLightWidth, height);
+        }
+    }
+}
 
 drawIntersection();
