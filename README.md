@@ -16,4 +16,6 @@ behavior in an interactive visual environment.
 - CSS
 
 ## Demo
+Check current version: https://arthsaar.github.io/Traffic-sim/
+
 (Actively working on it, Coming soon!)
