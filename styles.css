@@ -31,4 +31,5 @@ h2 {
 
 canvas {
     background: #222;
+    border: 1px solid white;
 }
