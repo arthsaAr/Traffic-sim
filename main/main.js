@@ -1,20 +1,22 @@
 const canvas = document.getElementById("simCanvas");
 const contents = canvas.getContext("2d");
 
-let currentLight_verticle = "green";
+let currentLight_vertical = "green";
 let currentLight_horizontal = "red";
-let lastSwitchTime_verticle = Date.now();
+let lastSwitchTime_vertical = Date.now();
 let lastSwitchTime_horizontal = Date.now();
 
 const lightsDurations = {
-    green: 30000,       //30 seconds
+    green: 25000,       //25 seconds
     orange: 5000,       //5 seconds
-    red: 20000      //20 seconds
+    red: 30000      //30 seconds
 }
 
 function updateTrafficLight() {
     const now = Date.now();
+
     const elapsed1 = now -lastSwitchTime_horizontal;
+    const elapsed2 = now -lastSwitchTime_vertical;
 
     if(elapsed1 >= lightsDurations[currentLight_horizontal]){
         if(currentLight_horizontal === "green"){
@@ -27,17 +29,15 @@ function updateTrafficLight() {
         lastSwitchTime_horizontal = now;
     }
 
-    const elapsed2 = now -lastSwitchTime_verticle;
-
-    if(elapsed2 >= lightsDurations[lastSwitchTime_verticle]){
-        if(lastSwitchTime_verticle === "red"){
-            lastSwitchTime_verticle = "green";
-        } else if(lastSwitchTime_verticle === "green"){
-            lastSwitchTime_verticle = "orange";
+    if(elapsed2 >= lightsDurations[currentLight_vertical]){
+        if(currentLight_vertical === "red"){
+            currentLight_vertical = "green";
+        } else if(currentLight_vertical === "green"){
+            currentLight_vertical = "orange";
         }else {
-            lastSwitchTime_verticle = "red";
+            currentLight_vertical = "red";
         }
-        lastSwitchTime_verticle = now;
+        lastSwitchTime_vertical = now;
     }
 }
 
@@ -66,39 +66,28 @@ function drawIntersection() {
     //this is for reseting the dash
     contents.setLineDash([]);
 
-
     //traffic line drawing (right road)
     const boxWidth1 = 15;
     const boxHeight1 = 70;
-    const posX1 = 483 - boxWidth1/2;
-    const posY1 = 440 +  - boxHeight1/2;
 
     contents.fillStyle="white";
     drawTrafficBox(483 - boxWidth1/2, 440 - boxHeight1/2, boxWidth1, boxHeight1, true, currentLight_horizontal);
-    // contents.fillRect(posX1, posY1, boxWidth1, boxHeight1);
 
     //left road
-    const posX2 = 318 - boxWidth1/2;
-    const posY2 = 360 +  - boxHeight1/2;
     contents.fillStyle="white";
     drawTrafficBox(318 - boxWidth1/2, 360 - boxHeight1/2, boxWidth1, boxHeight1, true, currentLight_horizontal);
-    // contents.fillRect(posX2, posY2, boxWidth1, boxHeight1);
 
     //top road
     const boxWidth2 = 70;
     const boxHeight2 = 15;
-    const posX3 = 440 - boxWidth2/2;
-    const posY3 = 315 +  - boxHeight2/2;
     contents.fillStyle= "white";
-    drawTrafficBox(440 - boxWidth2/2, 315 - boxHeight2/2, boxWidth2, boxHeight2, false , currentLight_verticle);
-    // contents.fillRect(posX3, posY3, boxWidth2, boxHeight2);
-
+    drawTrafficBox(440 - boxWidth2/2, 315 - boxHeight2/2, boxWidth2, boxHeight2, false , currentLight_vertical);
+    
     //bottom road
     const posX4 = 360 - boxWidth2/2;
     const posY4 = 483 +  - boxHeight2/2;
     contents.fillStyle= "white";
-    drawTrafficBox(360 - boxWidth2/2, 483 - boxHeight2/2, boxWidth2, boxHeight2, false, currentLight_verticle);
-    // contents.fillRect(posX4, posY4, boxWidth2, boxHeight2);
+    drawTrafficBox(360 - boxWidth2/2, 483 - boxHeight2/2, boxWidth2, boxHeight2, false, currentLight_vertical);
 }
 
 function drawTrafficBox(x,y,width, height, isVertical = true, active = null){
