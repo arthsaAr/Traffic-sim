@@ -6,8 +6,12 @@ let currentLight_horizontal = "red";
 let lastSwitchTime_vertical = Date.now();
 let lastSwitchTime_horizontal = Date.now();
 
-let carX = 0;
-let carY = 425;        
+let car1X = 0;
+let car1Y = 425;     
+
+let car2X = 800;
+let car2Y = 340;
+
 const carWidth = 60;
 const carHeight = 30;
 const speed = 2;        //this is pixels per frame
@@ -151,14 +155,22 @@ function loop(){
     drawIntersection();
 
     //moving car(red box for now) section
-    carX = carX + speed;
+    car1X = car1X + speed;
 
-    if(carX > canvas.width){
-        carX = -carWidth;
+    if(car1X > canvas.width){
+        car1X = -carWidth;
     }
 
     contents.fillStyle = "red";
-    contents.fillRect(rectX, rectY, carWidth, carHeight);
+    contents.fillRect(car1X, car1Y, carWidth, carHeight);
+
+    car2X = car2X - speed;
+    if(car2X < -carWidth){
+        car2X = canvas.width;
+    }
+
+    contents.fillStyle = "red";
+    contents.fillRect(car2X, car2Y, carWidth, carHeight);
 
     requestAnimationFrame(loop);
 }
