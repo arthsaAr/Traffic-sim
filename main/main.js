@@ -6,12 +6,19 @@ let currentLight_horizontal = "red";
 let lastSwitchTime_vertical = Date.now();
 let lastSwitchTime_horizontal = Date.now();
 
+let carX = 0;
+let carY = 425;        
+const carWidth = 60;
+const carHeight = 30;
+const speed = 2;        //this is pixels per frame
+
 const lightsDurations = {
     green: 25000,       //25 seconds
     orange: 5000,       //5 seconds
     red: 30000      //30 seconds
 }
 
+//method to update the traffic lights(change their colors)
 function updateTrafficLight() {
     const now = Date.now();
 
@@ -41,6 +48,7 @@ function updateTrafficLight() {
     }
 }
 
+//drawing the main intersection road
 function drawIntersection() {
     contents.fillStyle = "#333";
     contents.fillRect(0,325,800,150);       //horizontal road
@@ -90,6 +98,7 @@ function drawIntersection() {
     drawTrafficBox(360 - boxWidth2/2, 483 - boxHeight2/2, boxWidth2, boxHeight2, false, currentLight_vertical);
 }
 
+//function to draw a traffic light from the given parameters(which is hardcoded for this to match our requirements)
 function drawTrafficBox(x,y,width, height, isVertical = true, active = null){
     const brightColors = {
         red: "#FF0000",
@@ -136,10 +145,20 @@ function drawTrafficBox(x,y,width, height, isVertical = true, active = null){
 }
 
 function loop(){
+    //Traffic Lights section
     contents.clearRect(0, 0, canvas.width, canvas.height);
-
     updateTrafficLight();
     drawIntersection();
+
+    //moving car(red box for now) section
+    carX = carX + speed;
+
+    if(carX > canvas.width){
+        carX = -carWidth;
+    }
+
+    contents.fillStyle = "red";
+    contents.fillRect(rectX, rectY, carWidth, carHeight);
 
     requestAnimationFrame(loop);
 }
