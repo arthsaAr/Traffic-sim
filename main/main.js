@@ -97,8 +97,6 @@ function updateTrafficLight(){
     }
 }
 
-
-
 // function updateTrafficLight() {
 //     const now = Date.now();
 
@@ -133,6 +131,26 @@ function drawIntersection() {
     contents.fillStyle = "#333";
     contents.fillRect(0,325,800,150);       //horizontal road
     contents.fillRect(325,0,150,800);       //verticle road
+
+    //stop line for left-horizontal road
+    contents.strokeStyle = "gray";
+    contents.lineWidth = 4;
+    contents.setLineDash([20,0]);
+
+    contents.beginPath();
+    contents.moveTo(300, 325);
+    contents.lineTo(300, 475);
+    contents.stroke();
+
+    //stop line for right-horizontal road
+    contents.strokeStyle = "gray";
+    contents.lineWidth = 4;
+    contents.setLineDash([20,0]);
+
+    contents.beginPath();
+    contents.moveTo(500, 325);
+    contents.lineTo(500, 475);
+    contents.stroke();
 
     //dashed yellow lines
     contents.strokeStyle = "yellow";
