@@ -12,11 +12,11 @@ let car1Y = 425;
 let car2X = 800;
 let car2Y = 340;
 
-let car3X = 420;
-let car3Y = 0;
+let car4X = 420;
+let car4Y = 0;
 
-let car4X = 350;
-let car4Y = 800;
+let car3X = 350;
+let car3Y = 800;
 
 const carWidth1 = 60;
 const carWidth2 = 30;
