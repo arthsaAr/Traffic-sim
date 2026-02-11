@@ -1,10 +1,13 @@
 const canvas = document.getElementById("simCanvas");
 const contents = canvas.getContext("2d");
 
-let currentLight_vertical = "green";
-let currentLight_horizontal = "red";
-let lastSwitchTime_vertical = Date.now();
-let lastSwitchTime_horizontal = Date.now();
+// let currentLight_vertical = "green";
+// let currentLight_horizontal = "red";
+// let lastSwitchTime_vertical = Date.now();
+// let lastSwitchTime_horizontal = Date.now();
+
+let intersectionState = "verticalGreen";
+let lasSwitchTime = Date.now();
 
 let car1X = 0;
 let car1Y = 425;     
@@ -24,41 +27,106 @@ const carHeight1 = 30;
 const carHeight2 = 60;
 const speed = 2;        //this is pixels per frame
 
-const lightsDurations = {
-    green: 25000,       //25 seconds
-    orange: 5000,       //5 seconds
-    red: 30000      //30 seconds
+const lightDurations = {
+    verticalGreen: 25000,
+    verticalOrange: 5000,
+    allRed1: 2000,
+    horizontalGreen: 25000,
+    horizontalOrange: 5000,
+    allRed2: 2000
 }
+
+// const lightsDurations = {
+//     green: 25000,       //25 seconds
+//     orange: 5000,       //5 seconds
+//     red: 30000      //30 seconds
+// }
 
 //method to update the traffic lights(change their colors)
-function updateTrafficLight() {
+function updateTrafficLight(){
     const now = Date.now();
+    const elapsed = now - lasSwitchTime;
 
-    const elapsed1 = now -lastSwitchTime_horizontal;
-    const elapsed2 = now -lastSwitchTime_vertical;
-
-    if(elapsed1 >= lightsDurations[currentLight_horizontal]){
-        if(currentLight_horizontal === "green"){
-            currentLight_horizontal = "orange";
-        } else if(currentLight_horizontal === "orange"){
-            currentLight_horizontal = "red";
-        }else {
-            currentLight_horizontal = "green";
+    if(elapsed >= lightDurations[intersectionState]){
+        switch (intersectionState){
+            case "verticalGreen":
+                intersectionState = "verticalOrange";
+                break;
+            case "verticalOrange":
+                intersectionState = "allRed1";
+                break;
+            case "allRed1":
+                intersectionState = "horizontalGreen";
+                break;
+            case "horizontalGreen":
+                intersectionState = "horizontalOrange";
+                break;
+            case "horizontalOrange":
+                intersectionState = "allRed2";
+                break;
+            case "allRed2":
+                intersectionState = "verticalGreen";
+                break;
         }
-        lastSwitchTime_horizontal = now;
+        lasSwitchTime = now;
     }
 
-    if(elapsed2 >= lightsDurations[currentLight_vertical]){
-        if(currentLight_vertical === "red"){
+    //setting actual colors now based on current state
+    switch(intersectionState){
+        case "verticalGreen":
+            currentLight_horizontal = "red";
             currentLight_vertical = "green";
-        } else if(currentLight_vertical === "green"){
+            break;
+        case "verticalOrange":
+            currentLight_horizontal = "red";
             currentLight_vertical = "orange";
-        }else {
+            break;
+        case "horizontalGreen":
+            currentLight_horizontal = "green";
             currentLight_vertical = "red";
-        }
-        lastSwitchTime_vertical = now;
+            break;
+        case "horizontalOrange":
+            currentLight_horizontal = "orange";
+            currentLight_vertical = "red";
+            break;
+        case "allRed1":
+        case "allRed2":
+            currentLight_horizontal = "red";
+            currentLight_vertical = "red";
+            break;
     }
 }
+
+
+
+// function updateTrafficLight() {
+//     const now = Date.now();
+
+//     const elapsed1 = now -lastSwitchTime_horizontal;
+//     const elapsed2 = now -lastSwitchTime_vertical;
+
+//     if(elapsed1 >= lightsDurations[currentLight_horizontal]){
+//         if(currentLight_horizontal === "green"){
+//             currentLight_horizontal = "orange";
+//         } else if(currentLight_horizontal === "orange"){
+//             currentLight_horizontal = "red";
+//         }else {
+//             currentLight_horizontal = "green";
+//         }
+//         lastSwitchTime_horizontal = now;
+//     }
+
+//     if(elapsed2 >= lightsDurations[currentLight_vertical]){
+//         if(currentLight_vertical === "red"){
+//             currentLight_vertical = "green";
+//         } else if(currentLight_vertical === "green"){
+//             currentLight_vertical = "orange";
+//         }else {
+//             currentLight_vertical = "red";
+//         }
+//         lastSwitchTime_vertical = now;
+//     }
+// }
 
 //drawing the main intersection road
 function drawIntersection() {
