@@ -12,8 +12,16 @@ let car1Y = 425;
 let car2X = 800;
 let car2Y = 340;
 
-const carWidth = 60;
-const carHeight = 30;
+let car3X = 420;
+let car3Y = 0;
+
+let car4X = 350;
+let car4Y = 800;
+
+const carWidth1 = 60;
+const carWidth2 = 30;
+const carHeight1 = 30;
+const carHeight2 = 60;
 const speed = 2;        //this is pixels per frame
 
 const lightsDurations = {
@@ -158,19 +166,39 @@ function loop(){
     car1X = car1X + speed;
 
     if(car1X > canvas.width){
-        car1X = -carWidth;
+        car1X = -carWidth1;
     }
 
     contents.fillStyle = "red";
-    contents.fillRect(car1X, car1Y, carWidth, carHeight);
+    contents.fillRect(car1X, car1Y, carWidth1, carHeight1);
 
+    //second car right to left
     car2X = car2X - speed;
-    if(car2X < -carWidth){
+    if(car2X < -carWidth1){
         car2X = canvas.width;
     }
 
     contents.fillStyle = "red";
-    contents.fillRect(car2X, car2Y, carWidth, carHeight);
+    contents.fillRect(car2X, car2Y, carWidth1, carHeight1);
+
+    //verticle car top to bottom
+    car3Y = car3Y + speed;
+    if(car3Y > canvas.height){
+        car3Y = -carWidth2;
+    }
+
+    contents.fillStyle = "red";
+    contents.fillRect(car3X, car3Y, carWidth2, carHeight2);
+
+
+    //verticle car bottom to top
+    car4Y = car4Y - speed;
+    if(car4Y < -carWidth2){
+        car4Y = canvas.height;
+    }
+
+    contents.fillStyle = "red";
+    contents.fillRect(car4X, car4Y, carWidth2, carHeight2);
 
     requestAnimationFrame(loop);
 }
