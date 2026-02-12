@@ -100,7 +100,7 @@ function drawIntersection() {
     //stop line for left-horizontal road
     contents.strokeStyle = "gray";
     contents.lineWidth = 4;
-    contents.setLineDash([20,0]);
+    contents.setLineDash([15,0]);
 
     contents.beginPath();
     contents.moveTo(300, 325);
@@ -110,11 +110,31 @@ function drawIntersection() {
     //stop line for right-horizontal road
     contents.strokeStyle = "gray";
     contents.lineWidth = 4;
-    contents.setLineDash([20,0]);
+    contents.setLineDash([15,0]);
 
     contents.beginPath();
     contents.moveTo(500, 325);
     contents.lineTo(500, 475);
+    contents.stroke();
+
+    //stop line for top-vertical road
+    contents.strokeStyle = "gray";
+    contents.lineWidth = 4;
+    contents.setLineDash([15,0]);
+
+    contents.beginPath();
+    contents.moveTo(325, 297);
+    contents.lineTo(475, 297);
+    contents.stroke();
+
+    //stop line for bottom-vertical road
+    contents.strokeStyle = "gray";
+    contents.lineWidth = 4;
+    contents.setLineDash([15,0]);
+
+    contents.beginPath();
+    contents.moveTo(325, 502);
+    contents.lineTo(475, 502);
     contents.stroke();
 
     //dashed yellow lines
