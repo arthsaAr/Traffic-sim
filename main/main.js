@@ -255,7 +255,15 @@ function loop(){
     contents.fillRect(car1X, car1Y, carWidth1, carHeight1);
 
     //second car right to left
-    car2X = car2X - speed;
+    // car2X = car2X - speed;
+    if(currentLight_horizontal == "green"){
+        car2X = car2X - speed;
+    }else {
+        if(car2X > 10 + carStopRightX){
+            car2X = car2X - speed;
+        }
+    }
+
     if(car2X < -carWidth1){
         car2X = canvas.width;
     }
@@ -264,7 +272,15 @@ function loop(){
     contents.fillRect(car2X, car2Y, carWidth1, carHeight1);
 
     //verticle car top to bottom
-    car3Y = car3Y + speed;
+    // car3Y = car3Y + speed;
+    if(currentLight_vertical == "green"){
+        car3Y = car3Y + speed;
+    }else {
+        if(car3Y + carHeight2 + 10 < carStopTopY){
+            car3Y = car3Y + speed;
+        }
+    }
+
     if(car3Y > canvas.height){
         car3Y = -carWidth2;
     }
@@ -274,7 +290,15 @@ function loop(){
 
 
     //verticle car bottom to top
-    car4Y = car4Y - speed;
+    // car4Y = car4Y - speed;
+    if(currentLight_vertical == "green"){
+        car4Y = car4Y - speed;
+    }else {
+        if(car4Y > 10 + carStopBottomY){
+            car4Y = car4Y - speed;
+        }
+    }
+
     if(car4Y < -carWidth2){
         car4Y = canvas.height;
     }
