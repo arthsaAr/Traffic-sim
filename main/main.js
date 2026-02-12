@@ -1,10 +1,11 @@
 const canvas = document.getElementById("simCanvas");
 const contents = canvas.getContext("2d");
 
-// let currentLight_vertical = "green";
-// let currentLight_horizontal = "red";
-// let lastSwitchTime_vertical = Date.now();
-// let lastSwitchTime_horizontal = Date.now();
+//stop line positions(hard coded)
+let carStopLeftX = 300;
+let carStopRightX = 500;
+let carStopTopY = 297;
+let carStopBottomY = 502;
 
 let intersectionState = "verticalGreen";
 let lasSwitchTime = Date.now();
@@ -103,8 +104,8 @@ function drawIntersection() {
     contents.setLineDash([15,0]);
 
     contents.beginPath();
-    contents.moveTo(300, 325);
-    contents.lineTo(300, 475);
+    contents.moveTo(carStopLeftX, 325);
+    contents.lineTo(carStopLeftX, 475);
     contents.stroke();
 
     //stop line for right-horizontal road
@@ -113,8 +114,8 @@ function drawIntersection() {
     contents.setLineDash([15,0]);
 
     contents.beginPath();
-    contents.moveTo(500, 325);
-    contents.lineTo(500, 475);
+    contents.moveTo(carStopRightX, 325);
+    contents.lineTo(carStopRightX, 475);
     contents.stroke();
 
     //stop line for top-vertical road
@@ -123,8 +124,8 @@ function drawIntersection() {
     contents.setLineDash([15,0]);
 
     contents.beginPath();
-    contents.moveTo(325, 297);
-    contents.lineTo(475, 297);
+    contents.moveTo(325, carStopTopY);
+    contents.lineTo(475, carStopTopY);
     contents.stroke();
 
     //stop line for bottom-vertical road
@@ -133,8 +134,8 @@ function drawIntersection() {
     contents.setLineDash([15,0]);
 
     contents.beginPath();
-    contents.moveTo(325, 502);
-    contents.lineTo(475, 502);
+    contents.moveTo(325, carStopBottomY);
+    contents.lineTo(475, carStopBottomY);
     contents.stroke();
 
     //dashed yellow lines
@@ -233,8 +234,18 @@ function loop(){
     updateTrafficLight();
     drawIntersection();
 
-    //moving car(red box for now) section
-    car1X = car1X + speed;
+    //moving car(red box for now) section(left to right)
+    // car1X = car1X + speed;
+
+    //making sure to follow the lights as well
+    if(currentLight_horizontal == "green"){
+        car1X = car1X + speed;
+    }else {
+        //stop before crossing the gray lane lien
+        if(car1X + carWidth1 + 10 < carStopLeftX){
+            car1X = car1X + speed;
+        }
+    }
 
     if(car1X > canvas.width){
         car1X = -carWidth1;
