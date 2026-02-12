@@ -36,12 +36,6 @@ const lightDurations = {
     allRed2: 2000
 }
 
-// const lightsDurations = {
-//     green: 25000,       //25 seconds
-//     orange: 5000,       //5 seconds
-//     red: 30000      //30 seconds
-// }
-
 //method to update the traffic lights(change their colors)
 function updateTrafficLight(){
     const now = Date.now();
@@ -96,35 +90,6 @@ function updateTrafficLight(){
             break;
     }
 }
-
-// function updateTrafficLight() {
-//     const now = Date.now();
-
-//     const elapsed1 = now -lastSwitchTime_horizontal;
-//     const elapsed2 = now -lastSwitchTime_vertical;
-
-//     if(elapsed1 >= lightsDurations[currentLight_horizontal]){
-//         if(currentLight_horizontal === "green"){
-//             currentLight_horizontal = "orange";
-//         } else if(currentLight_horizontal === "orange"){
-//             currentLight_horizontal = "red";
-//         }else {
-//             currentLight_horizontal = "green";
-//         }
-//         lastSwitchTime_horizontal = now;
-//     }
-
-//     if(elapsed2 >= lightsDurations[currentLight_vertical]){
-//         if(currentLight_vertical === "red"){
-//             currentLight_vertical = "green";
-//         } else if(currentLight_vertical === "green"){
-//             currentLight_vertical = "orange";
-//         }else {
-//             currentLight_vertical = "red";
-//         }
-//         lastSwitchTime_vertical = now;
-//     }
-// }
 
 //drawing the main intersection road
 function drawIntersection() {
@@ -289,5 +254,4 @@ function loop(){
     requestAnimationFrame(loop);
 }
 
-// drawIntersection();
 loop();
