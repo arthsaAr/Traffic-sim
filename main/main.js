@@ -241,11 +241,6 @@ function loop(){
     if(currentLight_horizontal == "green"){
         car1X = car1X + speed;
     }else {
-        //stop before crossing the gray lane lien
-        // if(car1X + carWidth1 + 10 < carStopLeftX){
-        //     car1X = car1X + speed;
-        // }
-
         //if front of the car already passed the line, than keep going
         if(car1X >= carStopLeftX){
             car1X = car1X + speed;
@@ -267,7 +262,9 @@ function loop(){
     if(currentLight_horizontal == "green"){
         car2X = car2X - speed;
     }else {
-        if(car2X > 10 + carStopRightX){
+        if(car2X < carStopRightX){
+            car2X = car2X - speed;
+        }else if(car2X > 10 + carStopRightX){
             car2X = car2X - speed;
         }
     }
@@ -284,7 +281,9 @@ function loop(){
     if(currentLight_vertical == "green"){
         car3Y = car3Y + speed;
     }else {
-        if(car3Y + carHeight2 + 10 < carStopTopY){
+        if(car3Y > carStopTopY){
+            car3Y = car3Y + speed;
+        }else if(car3Y + carHeight2 + 10 < carStopTopY){
             car3Y = car3Y + speed;
         }
     }
@@ -302,7 +301,9 @@ function loop(){
     if(currentLight_vertical == "green"){
         car4Y = car4Y - speed;
     }else {
-        if(car4Y > 10 + carStopBottomY){
+        if(car4Y < carStopBottomY){
+            car4Y = car4Y - speed;
+        }else if(car4Y > 10 + carStopBottomY){
             car4Y = car4Y - speed;
         }
     }
