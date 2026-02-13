@@ -242,9 +242,17 @@ function loop(){
         car1X = car1X + speed;
     }else {
         //stop before crossing the gray lane lien
-        if(car1X + carWidth1 + 10 < carStopLeftX){
+        // if(car1X + carWidth1 + 10 < carStopLeftX){
+        //     car1X = car1X + speed;
+        // }
+
+        //if front of the car already passed the line, than keep going
+        if(car1X >= carStopLeftX){
+            car1X = car1X + speed;
+        }else if(car1X + carWidth1 + 10 < carStopLeftX){
             car1X = car1X + speed;
         }
+
     }
 
     if(car1X > canvas.width){
