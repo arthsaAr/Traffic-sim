@@ -143,15 +143,27 @@ function drawIntersection() {
     contents.lineWidth = 4;
     contents.setLineDash([20,15]); //this makes 20px dash with 15px gap
 
-    //first verticle line
+    //first verticle line(top part)
     contents.beginPath();
     contents.moveTo(400,0);
+    contents.lineTo(400, carStopTopY);
+    contents.stroke();
+
+    //first verticle line(bottom part)
+    contents.beginPath();
+    contents.moveTo(400,carStopBottomY);
     contents.lineTo(400, 800);
     contents.stroke();
 
-    //horizontal line
+    //horizontal line(left part)
     contents.beginPath()
     contents.moveTo(0,400);
+    contents.lineTo(carStopLeftX, 400);
+    contents.stroke();
+
+    //horizontal line(right part)
+    contents.beginPath()
+    contents.moveTo(carStopRightX,400);
     contents.lineTo(800, 400);
     contents.stroke();
 
