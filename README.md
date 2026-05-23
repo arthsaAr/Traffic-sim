@@ -4,6 +4,12 @@ A real-time traffic intersection simulation built using HTML, JavaScript & Canva
 The project models vehicle movement, traffic light state machines, and congestion
 behavior in an interactive visual environment.
 
+## SimulationScreen
+
+<p align="center">
+  <img src="assets/Screenshot/Screenshot.png" width="400" />
+</p>
+
 ## Features
 - Four-way intersection
 - Traffic light timing logic
